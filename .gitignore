@@ -1,6 +1,5 @@
 # macOS
 .DS_Store
-*.pem
 
 #intellij
 /.idea
