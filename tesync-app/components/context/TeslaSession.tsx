@@ -139,9 +139,9 @@ export function TeslaSessionProvider(props: React.PropsWithChildren) {
   };
 
   const signOut = async () => {
+    setSession(null);
     await AsyncStorage.removeItem("refresh_token");
     axios.defaults.headers.common["Authorization"] = "";
-    setSession(null);
   };
 
   return (

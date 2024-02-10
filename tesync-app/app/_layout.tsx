@@ -8,9 +8,12 @@ import { useColorScheme } from "react-native";
 import { TamaguiProvider } from "tamagui";
 
 import { TeslaSessionProvider } from "@/components/context/TeslaSession";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import { config } from "../tamagui.config";
+
+const queryClient = new QueryClient();
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -19,7 +22,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "/(app/(tabs)",
+  initialRouteName: "/(app)/index",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -47,9 +50,11 @@ function RootLayoutNav() {
   return (
     <TamaguiProvider config={config} defaultTheme={colorScheme as any}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <TeslaSessionProvider>
-          <Slot />
-        </TeslaSessionProvider>
+        <QueryClientProvider client={queryClient}>
+          <TeslaSessionProvider>
+            <Slot />
+          </TeslaSessionProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </TamaguiProvider>
   );
