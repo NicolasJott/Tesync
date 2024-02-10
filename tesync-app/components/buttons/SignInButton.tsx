@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React from "react";
 import { Button } from "tamagui";
 
@@ -10,6 +11,7 @@ export const SignInButton = () => {
       size={"$5"}
       color={"#F2F2F2"}
       pressStyle={{ bg: "#3457b1" }}
+      onPress={() => router.push("/sign-in")}
     >
       Sign In
     </Button>
